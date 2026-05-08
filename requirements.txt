@@ -7,3 +7,7 @@ scikit-learn
 nsepython
 matplotlib
 feedparser
+streamlit-option-menu
+streamlit-autorefresh
+nsetools
+requests
