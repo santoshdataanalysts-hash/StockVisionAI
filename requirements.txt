@@ -5,3 +5,4 @@ yfinance
 numpy
 scikit-learn
 nsepython
+matplotlib
