@@ -12,6 +12,7 @@ from sklearn.metrics import mean_absolute_error
 from streamlit_autorefresh import st_autorefresh
 from nsetools import Nse
 import requests
+import base64
 
 # ---------------- LOGIN ---------------- #
 
@@ -50,6 +51,70 @@ st.set_page_config(
     page_icon="📈",
     layout="wide"
 )
+# ---------------- BACKGROUND IMAGE ---------------- #
+
+def get_base64(file):
+    with open(file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+bg_image = get_base64("background.jpg")
+
+page_bg = f"""
+<style>
+
+.stApp {{
+    background-image: url("data:image/jpg;base64,{bg_image}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}}
+
+[data-testid="stSidebar"] {{
+    background: rgba(0,0,0,0.7);
+}}
+
+.block-container {{
+    background: rgba(0,0,0,0.65);
+    padding: 2rem;
+    border-radius: 20px;
+}}
+
+/* INPUT BOX */
+
+.stTextInput input {{
+    background-color: rgba(0,0,0,0.6) !important;
+    color: white !important;
+    border: 1px solid #00ff99 !important;
+}}
+
+/* DATAFRAME */
+
+[data-testid="stDataFrame"] {{
+    background-color: rgba(0,0,0,0.6) !important;
+    color: white !important;
+    border-radius: 15px;
+}}
+
+/* TABLE */
+
+table {{
+    background-color: rgba(0,0,0,0.6) !important;
+    color: white !important;
+}}
+
+/* DOWNLOAD BUTTON */
+
+.stDownloadButton button {{
+    background-color: rgba(0,0,0,0.7) !important;
+    color: white !important;
+    border: 1px solid #00ff99 !important;
+    border-radius: 10px;
+}}
+</style>
+"""
+
+st.markdown(page_bg, unsafe_allow_html=True)
 
 # ---------------- AUTO REFRESH ---------------- #
 
